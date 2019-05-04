@@ -18,8 +18,19 @@ public class HttpHandle implements Http {
 
 
         this.request= new Request(data);
-        // 路由转发处理
-        // 构造请求数据
+        this.response= new Response();
+        String url =this.request.getUrl();
+        if (url!=null){
+            String res= Router.getRoute().func(url).exec();
+
+            response.setBody(res);
+
+
+            // 路由转发处理
+            // 构造请求数据
+
+        }
+
         return  response.responseData();
     }
 

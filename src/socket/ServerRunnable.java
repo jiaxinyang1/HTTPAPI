@@ -18,7 +18,7 @@ public class ServerRunnable implements Runnable {
 
     private  SocketChannel socketChannel;
     private  StringBuilder stringBuilder;
-    private HttpHandle httpHandle;
+    private  static HttpHandle httpHandle;
 
     public ServerRunnable(SocketChannel socketChannel){
         this.socketChannel=socketChannel;
@@ -58,5 +58,9 @@ public class ServerRunnable implements Runnable {
         }
         System.out.println(stringBuilder.toString());
 
+    }
+
+    public static void setHttpHandle(HttpHandle httpHand) {
+        httpHandle = httpHand;
     }
 }

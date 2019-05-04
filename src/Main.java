@@ -1,4 +1,7 @@
+import http.HttpHandle;
+import http.Router;
 import socket.Server;
+import socket.ServerRunnable;
 
 import java.io.IOException;
 
@@ -12,6 +15,15 @@ public class Main {
 
     public static void main(String []args){
         Server server = new Server();
+        ServerRunnable.setHttpHandle(new HttpHandle());
+        Router.getRoute().add("/music",()->{
+            String data ="{\"music\":\"i am music\" }";
+            return data;
+        });
+        Router.getRoute().add("/user",()->{
+            String data ="{\"user\":\"i am user\" }";
+            return data;
+        });
         try {
             server.listen();
         } catch (IOException e) {

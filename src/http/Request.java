@@ -22,6 +22,7 @@ public class Request {
 
         this.params=new HashMap(16);
         this.requestData=requestData;
+        this.parse();
     }
     /**
      * @author hakurei
@@ -90,4 +91,11 @@ public class Request {
     }
 
 
+    public Map getParams() {
+        return params;
+    }
+
+    public String getUrl() {
+        return url;
+    }
 }

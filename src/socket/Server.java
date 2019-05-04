@@ -36,6 +36,7 @@ public class Server {
             serverSocketChannel.socket().bind(new InetSocketAddress(port));
             serverSocketChannel.configureBlocking(false);
 
+
         } catch (IOException e) {
             e.printStackTrace();
         }

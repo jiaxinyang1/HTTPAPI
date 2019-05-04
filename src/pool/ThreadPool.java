@@ -29,7 +29,8 @@ public class ThreadPool {
     public static ThreadPool getPool() {
 
         if (threadPool == null) {
-            return new ThreadPool();
+            threadPool= new ThreadPool();
+            return threadPool;
         } else {
             return threadPool;
         }
