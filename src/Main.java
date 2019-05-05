@@ -15,7 +15,7 @@ public class Main {
 
     public static void main(String []args){
         Server server = new Server();
-        ServerRunnable.setHttpHandle(new HttpHandle());
+        server.setHttpHandle(new HttpHandle());
         Router.getRoute().add("/music",()->{
             String data ="{\"music\":\"i am music\" }";
             return data;

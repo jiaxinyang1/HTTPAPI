@@ -1,5 +1,7 @@
 package socket;
 
+import http.Http;
+import http.HttpHandle;
 import pool.ThreadPool;
 
 import java.io.IOException;
@@ -18,6 +20,7 @@ public class Server {
 
 
     private ServerSocketChannel serverSocketChannel;
+    private Http  httpHandle;
     /**
      * 端口号
      */
@@ -43,13 +46,28 @@ public class Server {
 
     }
 
+    /**
+     * @author hakurei
+     *  开始监听连接
+     * @date 17:40 2019/5/4
+     **/
     public void listen() throws IOException {
          while (true){
              SocketChannel socketChannel =serverSocketChannel.accept();
                 if (socketChannel!=null){
-                    ThreadPool.getPool().getSingleThreadPool().execute(new ServerRunnable(socketChannel));
+                    try {
+                        ThreadPool.getPool().getSingleThreadPool().execute(new ServerRunnable(socketChannel,httpHandle.getClass().newInstance()));
+                    } catch (InstantiationException e) {
+                        e.printStackTrace();
+                    } catch (IllegalAccessException e) {
+                        e.printStackTrace();
+                    }
                 }
 
          }
+    }
+
+    public void setHttpHandle(Http httpHandle) {
+        this.httpHandle = httpHandle;
     }
 }

@@ -45,7 +45,6 @@ public class Response {
     }
 
     public String responseData(){
-     //   this.body="{\"abc\":\"123456\"}";
         return header+body;
     }
 

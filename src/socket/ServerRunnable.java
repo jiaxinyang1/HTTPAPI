@@ -1,9 +1,6 @@
 package socket;
 
-import http.HttpHandle;
-import http.Request;
-import http.Response;
-
+import http.Http;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.channels.SocketChannel;
@@ -18,10 +15,13 @@ public class ServerRunnable implements Runnable {
 
     private  SocketChannel socketChannel;
     private  StringBuilder stringBuilder;
-    private  static HttpHandle httpHandle;
+    private Http httpHandle;
 
-    public ServerRunnable(SocketChannel socketChannel){
+    public ServerRunnable(SocketChannel socketChannel,Http httpHandle){
+
         this.socketChannel=socketChannel;
+        this.httpHandle=httpHandle;
+
     }
     @Override
     public void run() {
@@ -47,7 +47,6 @@ public class ServerRunnable implements Runnable {
             buf.clear();
 
             String response= httpHandle.getData(stringBuilder.toString());
-         //   new Request(stringBuilder.toString()).parse();
             buf=ByteBuffer.wrap(response.getBytes("UTF-8"));
             socketChannel.write(buf);
             socketChannel.close();
@@ -60,7 +59,5 @@ public class ServerRunnable implements Runnable {
 
     }
 
-    public static void setHttpHandle(HttpHandle httpHand) {
-        httpHandle = httpHand;
-    }
+
 }

@@ -10,9 +10,6 @@ public class HttpHandle implements Http {
 
     private  Request request;
     private  Response response;
-
-
-
     @Override
     public String getData(String data) {
 
@@ -22,13 +19,7 @@ public class HttpHandle implements Http {
         String url =this.request.getUrl();
         if (url!=null){
             String res= Router.getRoute().func(url).exec();
-
             response.setBody(res);
-
-
-            // 路由转发处理
-            // 构造请求数据
-
         }
 
         return  response.responseData();

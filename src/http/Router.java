@@ -11,7 +11,7 @@ import java.util.Map;
  */
 public class Router {
 
-    private static Router route;
+    private static volatile Router route;
     private Map<String,Command> router;
 
     private   Router(){
@@ -19,12 +19,15 @@ public class Router {
     }
 
     public static Router getRoute(){
-        if (route==null){
-            route =new Router();
-            return route;
-        }else {
-            return route;
+        if (route==null) {
+            synchronized (Router.class){
+                if (route==null){
+                    route= new Router();
+                }
+            }
+
         }
+        return  route;
     }
     /**
      * 添加路由
